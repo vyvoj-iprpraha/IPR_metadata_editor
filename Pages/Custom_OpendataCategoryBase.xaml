@@ -1,0 +1,107 @@
+<!--
+Copyright 2022 Esri
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.​
+-->
+
+<p:EditorPage x:Class="upgrade_blank.Pages.Custom_OpendataCategoryBase" x:ClassModifier="internal" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:upgrade_blank"
+             xmlns:tp="clr-namespace:upgrade_blank.Pages"
+             xmlns:tu="clr-namespace:upgrade_blank.Utils"
+             xmlns:r="clr-namespace:upgrade_blank.Properties"
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"              
+             mc:Ignorable="d" 
+             Loaded="FillXml">
+
+  <UserControl.Resources>
+    <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
+    
+    <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <covDim editorFillOnly="True" >
+            <RangeDim editorFillOnly="True" editorExpand="False"/>
+            <Band editorFillOnly="True" editorExpand="False"/>
+          </covDim>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+      
+    <XmlDataProvider x:Key="MD_OpendataCategory" 
+                 XPath="codelist/code"
+                 IsAsynchronous= "False"
+                 IsInitialLoadEnabled= "True">
+      <x:XData>
+        <codelist id="MD_OpendataCategory" source="Custom" xmlns="">
+          <code value="" source="ArcGIS">Empty</code>
+            <code value="Doprava" source="Custom" stdvalue="doprava">Doprava</code>
+            <code value="Energie" source="Custom" stdvalue="energie">Energie</code>
+            <code value="Hospodářství a finance" source="Custom" stdvalue="hospodarstviafinance">Hospodářství a finance</code>
+            <code value="Mezinárodní otázky" source="Custom" stdvalue="mezinarodniotazky">Mezinárodní otázky</code>
+            <code value="Populace a společnost" source="Custom" stdvalue="populaceaspolecnost">Populace a společnost</code>
+            <code value="Předběžné údaje" source="Custom" stdvalue="predbezneudaje">Předběžné údaje</code>
+            <code value="Regiony a města" source="Custom" stdvalue="regionyamesta">Regiony a města</code>
+            <code value="Spravedlnost, právní systém a veřejná bezpečnost" source="Custom" stdvalue="spravedlnost_pravnisystemaverejnabezpecnost">Spravedlnost, právní systém a veřejná bezpečnost</code>
+            <code value="Věda a technika" source="Custom" stdvalue="vedaatechnika">Věda a technika</code>
+            <code value="Vláda a veřejný sektor" source="Custom" stdvalue="vladaaverejnysektor">Vláda a veřejný sektor</code>
+            <code value="Vzdělávání, kultura a sport" source="Custom" stdvalue="vzdelavani_kulturaasport">Vzdělávání, kultura a sport</code>
+            <code value="Zdraví" source="Custom" stdvalue="zdravi">Zdraví</code>
+            <code value="Zemědělství, rybolov, lesnictví a výživa" source="Custom" stdvalue="zemedelstve_rybolov_lesnictviavyziva">Zemědělství, rybolov, lesnictví a výživa</code>
+            <code value="Životní prostředí" source="Custom" stdvalue="zivotniprostredi">Životní prostředí</code>
+        </codelist>
+      </x:XData>
+    </XmlDataProvider>
+
+    <!--<e:Codelists x:Key="MD_CoverageContentTypeCode" CodelistName="MD_CoverageContentTypeCode"/>-->
+
+  </UserControl.Resources>
+
+  <StackPanel>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+
+      <!-- content type -->
+      <Label Style="{DynamicResource EditorHLabelStyle}" Grid.Row="1" Grid.Column="0" Content="{x:Static r:Resources.OPENDATA_CATEGORY}"/>
+      <ComboBox Loaded="PostProcessComboBoxValues" p:EditorPage.SourceXPath="OpendataCategoryType/@value" Grid.Row="1" Grid.Column="1" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
+          v:Nav.AnchorName="OpendataCategoryType"
+          ToolTip="{x:Static r:Definitions.MD_CoverageDescription_contentType}"
+          ItemsSource="{Binding Source={StaticResource MD_OpendataCategory}}"
+          DisplayMemberPath="."
+          SelectedValuePath="@value"
+          Name="OpendataCategory">
+        <ComboBox.SelectedValue>
+          <e:MetadataBinding XPath="OpendataCategoryType/@value"/>
+        </ComboBox.SelectedValue>
+      </ComboBox>
+    </Grid>
+
+
+    <!-- validate after all anchors are loaded -->
+    <v:PageValidateControl/>
+
+  </StackPanel>
+
+</p:EditorPage>

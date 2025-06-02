@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "upgrade_blank": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Esri\\ArcGIS\\Pro\\bin\\ArcGISPro.exe"
+    }
+  }
+}

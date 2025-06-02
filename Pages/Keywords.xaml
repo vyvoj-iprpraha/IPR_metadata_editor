@@ -1,0 +1,1427 @@
+<!--
+Copyright 2022 Esri
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.​
+-->
+
+<p:EditorPage x:Class="upgrade_blank.Pages.MTK_Keywords" x:ClassModifier="internal" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:upgrade_blank"
+             xmlns:tp="clr-namespace:upgrade_blank.Pages"
+             xmlns:tu="clr-namespace:upgrade_blank.Utils"
+             xmlns:r="clr-namespace:upgrade_blank.Properties"
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"              
+             mc:Ignorable="d" 
+             Loaded="FillXml">
+  <UserControl.Resources>
+    <!-- 
+    <!ENTITY % DataIdent '(idCitation, idAbs, idPurp?, idCredit*, idStatus*, idPoC*, resMaint*, graphOver*, dsFormat*, 
+          discKeys*, otherKeys*, placeKeys*, searchKeys*, stratKeys*, tempKeys*, themeKeys*, idSpecUse*, resConst*, aggrInfo*, spatRpType*, dataScale*, dataLang+, dataChar*, tpCat*, envirDesc?, dataExt*, suppInfo?)'>
+    <!ENTITY % Keywords '(keyword+, keyTyp?, thesaName?, thesaLang?)'> 
+    <!ELEMENT topicCat (TopicCat)>    
+    <!ELEMENT discKeys %Keywords;>
+    <!ELEMENT otherKeys %Keywords;>
+    <!ELEMENT placeKeys %Keywords;>
+    <!ELEMENT searchKeys (keyword+)>
+    <!ELEMENT stratKeys %Keywords;>
+    <!ELEMENT tempKeys %Keywords;>
+    <!ELEMENT themeKeys %Keywords;>    
+    -->
+
+    <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
+    <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+        <x:XData>
+            <ANY xmlns="">
+                <metadata>
+                    <Esri>
+                        <DataProperties>
+                            <itemProps>
+                                <imsContentType export="False"/>
+                            </itemProps>
+                        </DataProperties>
+                    </Esri>
+                    <dataIdInfo>
+                        <tpCatBag>
+                            <TopicCatCd_001 value="False"/>
+                            <TopicCatCd_002 value="False"/>
+                            <TopicCatCd_003 value="False"/>
+                            <TopicCatCd_004 value="False"/>
+                            <TopicCatCd_005 value="False"/>
+                            <TopicCatCd_006 value="False"/>
+                            <TopicCatCd_007 value="False"/>
+                            <TopicCatCd_008 value="False"/>
+                            <TopicCatCd_009 value="False"/>
+                            <TopicCatCd_010 value="False"/>
+                            <TopicCatCd_011 value="False"/>
+                            <TopicCatCd_012 value="False"/>
+                            <TopicCatCd_013 value="False"/>
+                            <TopicCatCd_014 value="False"/>
+                            <TopicCatCd_015 value="False"/>
+                            <TopicCatCd_016 value="False"/>
+                            <TopicCatCd_017 value="False"/>
+                            <TopicCatCd_018 value="False"/>
+                            <TopicCatCd_019 value="False"/>
+                        </tpCatBag>
+                        <!-- TODO: other keywords -->
+                    </dataIdInfo>
+                    <!--*******************************************************************************-->
+                    <custom>
+                        <TopicStatus>
+                            <INSPIREstatus>Adresy</INSPIREstatus>
+                            <IPRstatus>Ostatní tematická data</IPRstatus>
+                            <UAPstatus2024>Není jev ÚAP</UAPstatus2024>
+                            <UAPstatus>Není jev ÚAP</UAPstatus>
+                            <GEMETstatus>Bezpečnost/Safety</GEMETstatus>
+                            <IPRkeywordstatus>Archivní mapy/Archival maps</IPRkeywordstatus>
+                        </TopicStatus>
+                    </custom>
+                </metadata>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!--INSPIRE-->
+    <XmlDataProvider x:Key="ThemeINSPIRE" XPath="/"
+          IsAsynchronous= "False"
+          IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Není téma INSPIRE</status>
+                    <status>Adresy</status>
+                    <status>Bioregiony</status>
+                    <status>Budovy</status>
+                    <status>Dopravní sítě</status>
+                    <status>Energetické zdroje</status>
+                    <status>Geologie</status>
+                    <status>Chráněná území</status>
+                    <status>Krajinný pokryv</status>
+                    <status>Lidské zdraví a bezpečnost</status>
+                    <status>Meteorologické geografické prvky</status>
+                    <status>Nadmořská výška</status>
+                    <status>Nerostné suroviny</status>
+                    <status>Oblasti ohrožené přírodními riziky</status>
+                    <status>Ortofotografické zobrazení</status>
+                    <status>Parcely</status>
+                    <status>Půda</status>
+                    <status>Rozložení druhů</status>
+                    <status>Rozložení obyvatelstva – demografie</status>
+                    <status>Souřadnicové referenční systémy</status>
+                    <status>Správní oblasti, chráněná pásma, regulovaná území a jednotky podávající hlášení</status>
+                    <status>Stanoviště a biotopy</status>
+                    <status>Statistické jednotky</status>
+                    <status>Stav ovzduší</status>
+                    <status>Systémy geografických souřadnicových sítí</status>
+                    <status>Územní správní jednotky</status>
+                    <status>Veřejné služby a služby veřejné správy</status>
+                    <status>Vodstvo</status>
+                    <status>Využití území</status>
+                    <status>Výrobní a průmyslová zařízení</status>
+                    <status>Zařízení pro sledování životního prostředí</status>
+                    <status>Zemědělská a akvakulturní zařízení</status>
+                    <status>Zeměpisná jména</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!--IPR-->
+    <XmlDataProvider x:Key="ThemeIPR" XPath="/"
+          IsAsynchronous= "False"
+          IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Digitální technická mapa Prahy</status>
+                    <status>Letecké snímkování</status>
+                    <status>Ostatní tematická data</status>
+                    <status>Územně analytické podklady</status>
+                    <status>Územní plán</status>
+                    <status>3D modely</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+
+    <!--UAP2020-->
+    <XmlDataProvider x:Key="ThemeUAP" XPath="/"
+          IsAsynchronous= "False"
+          IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Není jev ÚAP</status>
+                    <status>A001 - Zastavěné území</status>
+                    <status>A001a - Plochy s rozdílným způsobem využití</status>
+                    <status>A001b - Zastavitelné plochy, plochy přestavby a plochy změn v krajině</status>
+                    <status>A002 - Zařízení výroby</status>
+                    <status>A003 - Zařízení občanského vybavení</status>
+                    <status>A003a - Veřejná prostranství</status>
+                    <status>A004a - Brownfieldy</status>
+                    <status>A005a - Památkové rezervace a památkové zóny a jejich ochranná pásma</status>
+                    <status>A008a - Nemovité národní kulturní památky a nemovité kulturní památky a jejich ochranná pásma</status>
+                    <status>A010 - Statky zapsané na seznamu světového dědictví a jejich nárazníkové zóny</status>
+                    <status>A011 - Urbanistické a krajinné hodnoty</status>
+                    <status>A011a - Struktura a výška zástavby</status>
+                    <status>A013a - Architektonicky nebo urbanisticky cenné stavby nebo soubory staveb, historicky významné stavby, místa nebo soubory staveb</status>
+                    <status>A016 - Území s archeologickými nálezy</status>
+                    <status>A017a - Krajinný ráz</status>
+                    <status>A017b - Krajiny a krajinné okrsky</status>
+                    <status>A021 - Územní systém ekologické stability</status>
+                    <status>A023a - Významné krajinné prvky</status>
+                    <status>A024 - Přechodně chráněné plochy</status>
+                    <status>A025a - Velkoplošná zvláště chráněná území, jejich zóny a ochranná pásma a klidové zóny národních parků</status>
+                    <status>A027a - Maloplošná zvláště chráněná území a jejich ochranná pásma</status>
+                    <status>A027a - Maloplošná zvláště chráněná území a jejich ochranná pásma</status>
+                    <status>A030 - Přírodní parky</status>
+                    <status>A032 - Památné stromy a informace o jejich ochranném pásmu</status>
+                    <status>A033 - Biosférické rezervace unesco, geoparky unesco, národní geoparky</status>
+                    <status>A034 - Natura 2000 - evropsky významné lokality</status>
+                    <status>A035 - Natura 2000 - ptačí oblasti</status>
+                    <status>A035a - Smluvně chráněná území</status>
+                    <status>A036 - Lokality výskytu zvláště chráněných druhů rostlin a živočichů s národním významem</status>
+                    <status>A036a - Mokřady dle ramsarské úmluvy</status>
+                    <status>A036b - Biotop vybraných zvláště chráněných druhů velkých savců</status>
+                    <status>A037a - Lesy, jejich kategorizace a vzdálenost 50 m od okraje lesa</status>
+                    <status>A041 - Bonitované půdně ekologické jednotky a třídy ochrany zemědělského půdního fondu</status>
+                    <status>A042a - Plochy vodní a větrné eroze</status>
+                    <status>A043 - Investice do půdy za účelem zlepšení půdní úrodnosti</status>
+                    <status>A043a - Plochy vhodné k zalesnění, plochy vhodné k zatravnění</status>
+                    <status>A044 - Vodní zdroje pro zásobování pitnou vodou a jejich ochranná pásma</status>
+                    <status>A045 - Chráněné oblasti přirozené akumulace vod</status>
+                    <status>A046 - Zranitelné oblasti povrchových a podzemních vod</status>
+                    <status>A046a - Povrchové vody využívané ke koupání</status>
+                    <status>A047 - Vodní útvary povrchových a podzemních vod, vodní nádrže a jejich ochranná pásma</status>
+                    <status>A048a - Území chráněná pro akumulaci povrchových vod</status>
+                    <status>A049 - Povodí vodního toku, rozvodnice</status>
+                    <status>A050a - Záplavová území včetně aktivních zón</status>
+                    <status>A052a - Kategorie území podle map povodňového ohrožení v oblastech s významným povodňovým rizikem</status>
+                    <status>A052b - Kritické body a jejich povodí</status>
+                    <status>A053 - Území ohrožená zvláštními povodněmi</status>
+                    <status>A054a - Stavby, objekty a zařízení na ochranu před povodněmi a území určená k řízeným rozlivům povodní</status>
+                    <status>A055 - Přírodní léčivé zdroje, zdroje přírodní minerální vody a jejich ochranná pásma</status>
+                    <status>A056 - Lázeňská místa včetně vymezení vnitřních a vnějších území lázeňského místa</status>
+                    <status>A057 - Dobývací prostory</status>
+                    <status>A058 - Chráněná ložisková území</status>
+                    <status>A059 - Chráněná území pro zvláštní zásahy do zemské kůry</status>
+                    <status>A060 - Ložiska nerostných surovin</status>
+                    <status>A061 - Poddolovaná území</status>
+                    <status>A062 - Sesuvná území a území jiných geologických rizik</status>
+                    <status>A063 - Stará důlní díla</status>
+                    <status>A064 - Staré zátěže území a kontaminované plochy</status>
+                    <status>A064a - Uzavřená a opuštěná úložná místa těžebního odpadu</status>
+                    <status>A065 - Oblasti s překročenými imisními limity</status>
+                    <status>A065a - Hlukové zóny obcí</status>
+                    <status>A067 - Technologické objekty zásobování vodou a jejich ochranná pásma</status>
+                    <status>A068 - Vodovodní řady a jejich ochranná pásma</status>
+                    <status>A069 - Technologické objekty odvádění a čištění odpadních vod a jejich ochranná pásma</status>
+                    <status>A070 - Kanalizační stoky a jejich ochranná pásma</status>
+                    <status>A071 - Výrobny elektřiny a jejich ochranná pásma</status>
+                    <status>A072 - Elektrické stanice a jejich ochranná pásma</status>
+                    <status>A073 - Nadzemní a podzemní vedení elektrizační soustavy a jejich ochranná pásma</status>
+                    <status>A074 - Technologické objekty zásobování plynem a jejich ochranná a bezpečnostní pásma</status>
+                    <status>A075 - Vedení plynovodů a jejich ochranná a bezpečnostní pásma</status>
+                    <status>A076 - Technologické objekty zásobování jinými produkty a jejich ochranná pásma</status>
+                    <status>A077a - Vedení pro zásobování jinými produkty a jejich ochranná pásma</status>
+                    <status>A079 - Technologické objekty zásobování teplem a jejich ochranná pásma</status>
+                    <status>A080 - Teplovody a jejich ochranná pásma</status>
+                    <status>A082a - Elektronické komunikace, jejich ochranná pásma a zájmová území</status>
+                    <status>A082b - Sdružené liniové sítě</status>
+                    <status>A083 - Jaderná zařízení</status>
+                    <status>A084 - Objekty a zařízení zařazené do skupiny a nebo b s umístěnými nebezpečnými látkami</status>
+                    <status>A085 - Skládky a jejich ochranná pásma</status>
+                    <status>A086 - Spalovny a zařízení zpracovávající biologicky rozložitelné odpady a jejich ochranná pásma</status>
+                    <status>A087 - Zařízení na odstraňování nebezpečného odpadu a jejich ochranná pásma</status>
+                    <status>A093a - Pozemní komunikace, jejich kategorie a jejich ochranná pásma</status>
+                    <status>A093b - Terminály a logistická centra</status>
+                    <status>A094a - Železniční dráhy, jejich kategorie a jejich ochranná pásma</status>
+                    <status>A098 - Lanové dráhy a jejich ochranná pásma</status>
+                    <status>A100 - Tramvajové dráhy a jejich ochranná pásma</status>
+                    <status>A101 - Trolejbusové dráhy a jejich ochranná pásma</status>
+                    <status>A102a - Letiště a letecké stavby a jejich ochranná pásma a zájmová území</status>
+                    <status>A104 - Sledované vodní cesty</status>
+                    <status>A105 - Hraniční přechody</status>
+                    <status>A105a - Linky a zastávky veřejné hromadné dopravy</status>
+                    <status>A106 - Cyklostezky, cyklotrasy, hipostezky, turistické stezky, běžkařské trasy, sjezdovky</status>
+                    <status>A107 - Objekty důležité pro obranu státu a jejich ochranná pásma a zájmová území</status>
+                    <status>A108 - Vojenské újezdy a jejich zájmová území</status>
+                    <status>A109 - Vymezené zóny havarijního plánování</status>
+                    <status>A110a - Objekty civilní a požární ochrany</status>
+                    <status>A112a - Stavby důležité pro bezpečnost státu a vymezená území pro zajištění bezpečnosti státu</status>
+                    <status>A113a - Pohřebiště, krematoria, válečné hroby a pietní místa</status>
+                    <status>A114 - Jiná ochranná pásma</status>
+                    <status>A116a - Plán společných zařízení</status>
+                    <status>A118 - Další záměry, pokud nejsou vyjádřeny jinou položkou</status>
+                    <status>A118a - Vymezení správních územních celků</status>
+                    <status>A119 - Další dostupné informace o území</status>
+                    <status>B001 - Vývoj počtu obyvatelstva</status>
+                    <status>B002a - Věkové složení obyvatelstva</status>
+                    <status>B004a - Vzdělanostní složení obyvatelstva</status>
+                    <status>B006 - Sídelní struktura</status>
+                    <status>B007 - Ekonomická aktivita podle odvětví</status>
+                    <status>B007a - Daňové příjmy rozpočtů obcí a krajů</status>
+                    <status>B007b - Hrubý domácí produkt</status>
+                    <status>B008 - Nezaměstnanost</status>
+                    <status>B009a - Vyjížďka a dojížďka do zaměstnání a škol</status>
+                    <status>B011 - Výstavba domů a bytů</status>
+                    <status>B012a - Obydlenost bytového fondu</status>
+                    <status>B013 - Stáří a struktura bytového a domovního fondu</status>
+                    <status>B015 - Rekreační oblasti</status>
+                    <status>B016 - Počet staveb pro rodinnou rekreaci</status>
+                    <status>B017 - Kapacita a kategorie ubytovacích zařízení</status>
+                    <status>B019a - Podíl obyvatel napojených na veřejnou technickou infrastrukturu</status>
+                    <status>B022 - Podíl zemědělské půdy z celkové výměry územního celku</status>
+                    <status>B023a - Podíl druhů pozemků z celkové výměry zemědělské půdy</status>
+                    <status>B026a - Podíl tříd ochrany zemědělské půdy z celkové výměry územního celku</status>
+                    <status>B027a - Podíl jednotlivých druhů pozemků z celkové výměry územního celku</status>
+                    <status>B032 - Hranice přírodních lesních oblastí</status>
+                    <status>B033 - Hranice bioregionů a biochor</status>
+                    <status>B034 - Hranice klimatických regionů</status>
+                    <status>B034a - Regionalizace území dle míry ohrožení suchem</status>
+                    <status>B035a - Počet obcí a obyvatel na území s překročeným imisním limitem</status>
+                    <status>B037 - Další dostupné informace o území</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!--UAP-->
+    <XmlDataProvider x:Key="ThemeUAP2024" XPath="/"
+                      IsAsynchronous= "False"
+                      IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Není jev ÚAP</status>
+                    <status>J.001 - Zastavěné území</status>
+                    <status>J.002 - Využití území</status>
+                    <status>J.003 - Brownfield</status>
+                    <status>J.004 - Nemovitá národní kulturní památka, nemovitá kulturní památka a jejich ochranné pásmo</status>
+                    <status>J.005 - Památkově chráněné území a jeho ochranné pásmo</status>
+                    <status>J.006 - Území s archeologickými nálezy</status>
+                    <status>J.007 - Statek zapsaný na Seznamu světového dědictví a jeho nárazníková zóna</status>
+                    <status>J.008 - Struktura a výška zástavby, významná dominanta</status>
+                    <status>J.009 - Architektonicky nebo urbanisticky cenná stavba nebo soubor staveb, historicky významná stavba, místo nebo soubor staveb</status>
+                    <status>J.010 - Urbanistická a krajinná hodnota, znak historické kulturní krajiny</status>
+                    <status>J.011 - Památný strom a jeho ochranné pásmo</status>
+                    <status>J.012 - Územní systém ekologické stability</status>
+                    <status>J.013 - Významný krajinný prvek</status>
+                    <status>J.014 - Přechodně chráněná plocha</status>
+                    <status>J.015 - Zvláště chráněné území, zóny ochrany přírody národního parku, zóny odstupňované ochrany přírody chráněné krajinné oblasti, klidová území národního parku, ochranné pásmo zvláště chráněného území</status>
+                    <status>J.016 - Evropsky významná lokalita, ptačí oblast</status>
+                    <status>J.017 - Biosférická rezervace UNESCO, geopark UNESCO, národní geopark</status>
+                    <status>J.018 - Smluvně chráněné území</status>
+                    <status>J.019 - Mokřad podle Ramsarské úmluvy</status>
+                    <status>J.020 - Biotop vybraných zvláště chráněných druhů rostlin a živočichů</status>
+                    <status>J.021 - Biotop vybraných zvláště chráněných druhů velkých savců</status>
+                    <status>J.022 - Přírodní park</status>
+                    <status>J.023 - Krajinný ráz</status>
+                    <status>J.024 - Krajina a krajinný okrsek</status>
+                    <status>J.025 - Les, jeho kategorizace a vzdálenost 30 m od okraje lesa</status>
+                    <status>J.026 - Bonitovaná půdně ekologická jednotka a třída ochrany zemědělského půdního fondu</status>
+                    <status>J.027 - Plocha vodní a větrné eroze</status>
+                    <status>J.028 - Investice do půdy za účelem zlepšení půdní úrodnosti</status>
+                    <status>J.029 - Plocha vhodná k zalesnění, plocha vhodná k zatravnění</status>
+                    <status>J.030 - Vodní zdroj pro zásobování pitnou vodou a jeho ochranné pásmo</status>
+                    <status>J.031 - Chráněná oblast přirozené akumulace vod</status>
+                    <status>J.032 - Zranitelná oblast povrchových a podzemních vod</status>
+                    <status>J.033 - Oblast povrchových vod využívaná ke koupání</status>
+                    <status>J.034 - Vodní útvar povrchových a podzemních vod</status>
+                    <status>J.035 - Vodní nádrž</status>
+                    <status>J.036 - Území chráněné pro akumulaci povrchových vod</status>
+                    <status>J.037 - Povodí vodního toku, rozvodnice</status>
+                    <status>J.038 - Záplavové území včetně aktivní zóny</status>
+                    <status>J.039 - Kategorie území podle map povodňového ohrožení</status>
+                    <status>J.040 - Kritický bod a jeho povodí</status>
+                    <status>J.041 - Území ohrožené zvláštními povodněmi</status>
+                    <status>J.042 - Stavba, objekt a zařízení na ochranu před povodněmi a území určené k řízeným rozlivům povodní</status>
+                    <status>J.043 - Přírodní léčivý zdroj, zdroj přírodní minerální vody a jejich ochranné pásmo</status>
+                    <status>J.044 - Lázeňské místo včetně vymezení vnitřního a vnějšího území lázeňského místa</status>
+                    <status>J.045 - Dobývací prostor a prostor pro dobývání ložisek nerostů</status>
+                    <status>J.046 - Chráněné ložiskové území</status>
+                    <status>J.047 - Chráněné území pro zvláštní zásahy do zemské kůry</status>
+                    <status>J.048 - Ložisko nerostných surovin</status>
+                    <status>J.049 - Poddolované území</status>
+                    <status>J.050 - Sesuvné území a území jiných geologických rizik</status>
+                    <status>J.051 - Staré důlní dílo</status>
+                    <status>J.052 - Stará zátěž území a kontaminovaná plocha</status>
+                    <status>J.053 - Uzavřené a opuštěné úložné místo těžebního odpadu</status>
+                    <status>J.054 - Oblast s překročenými imisními limity</status>
+                    <status>J.055 - Stacionární zdroj znečišťování ovzduší</status>
+                    <status>J.056 - Hluková zóna obce</status>
+                    <status>J.057 - Trasa a objekt vodovodní sítě a jejich ochranné pásmo</status>
+                    <status>J.058 - Trasa a objekt stokové sítě a jejich ochranné pásmo</status>
+                    <status>J.059 - Trasa a objekt elektrické sítě a jejich ochranné pásmo</status>
+                    <status>J.060 - Trasa a objekt plynovodní a jejich ochranné pásmo</status>
+                    <status>J.061 - Trasa a objekt produktovodu a jejich ochranné pásmo</status>
+                    <status>J.062 - Trasa a objekt teplovodu a jejich ochranné pásmo</status>
+                    <status>J.063 - Elektronická komunikace, její ochranné pásmo a zájmové území</status>
+                    <status>J.064 - Sdružená liniová síť</status>
+                    <status>J.065 - Jaderné zařízení a jeho ochranné pásmo</status>
+                    <status>J.066 - Objekt a zařízení zařazené do skupiny A nebo B podle zákona o prevenci závažných havárií</status>
+                    <status>J.067 - Dosahy havarijních projevů pro objekty vymezené zákonem o prevenci závažných havárií</status>
+                    <status>J.068 - Zařízení odpadového hospodářství a jeho ochranné pásmo</status>
+                    <status>J.069 - Pozemní komunikace a její ochranné pásmo</status>
+                    <status>J.070 - Terminál a logistické centrum</status>
+                    <status>J.071 - Stavba dráhy, stavba na dráze a jejich ochranné pásmo</status>
+                    <status>J.072 - Letiště, letecká stavba a jejich ochranné pásmo a zájmové území</status>
+                    <status>J.073 - Sledovaná vodní cestaa</status>
+                    <status>J.074 - Přeshraniční propojení</status>
+                    <status>J.075 - Linka a zastávka veřejné hromadné dopravy</status>
+                    <status>J.076 - Cyklostezka, cyklotrasa, hipostezka, turistická stezka, běžkařská trasa, sjezdovka</status>
+                    <status>J.077 - Území vymezené Ministerstvem obrany pro zajišťování obrany státu, objekty důležité pro obranu státu a jejich ochranná pásma</status>
+                    <status>J.078 - Vojenský újezd a jeho zájmové území</status>
+                    <status>J.079 - Vymezená zóna havarijního plánování</status>
+                    <status>J.080 - Objekt civilní a požární ochrany</status>
+                    <status>J.081 - Území vymezené Ministerstvem vnitra pro zajišťování bezpečnosti státu a stavby důležité pro bezpečnost státu</status>
+                    <status>J.082 - Bezpečnostní pásma staveb určených k nakládání s výbušninami</status>
+                    <status>J.083 - Pohřebiště, krematorium, válečný hrob a pietní místo</status>
+                    <status>J.084 - Jiné ochranné pásmo</status>
+                    <status>J.085 - Plán společných zařízení</status>
+                    <status>J.086 - Povolení záměru</status>
+                    <status>J.087 - Záměr, pokud není vyjádřen jinou položkou</status>
+                    <status>J.088 - Vymezení správních územních celků</status>
+                    <status>J.089 - Vývoj počtu obyvatelstva</status>
+                    <status>J.090 - Věkové složení obyvatelstva</status>
+                    <status>J.091 - Vzdělanostní složení obyvatelstva</status>
+                    <status>J.092 - Sídelní struktura</status>
+                    <status>J.093 - Ekonomická aktivita podle odvětví</status>
+                    <status>J.094 - Daňové příjmy rozpočtů obcí a krajů</status>
+                    <status>J.095 - Hrubý domácí produkt</status>
+                    <status>J.096 - Nezaměstnanost</status>
+                    <status>J.097 - Index sociálního vyloučení</status>
+                    <status>J.098 - Vyjížďka a dojížďka</status>
+                    <status>J.099 - Výstavba domů a bytů</status>
+                    <status>J.100 - Obydlenost bytového fondu</status>
+                    <status>J.101 - Stáří a struktura bytového a domovního fondu</status>
+                    <status>J.102 - Rekreační a turistické oblasti</status>
+                    <status>J.103 - Kapacita a kategorie ubytovacích zařízení</status>
+                    <status>J.104 - Podíl obyvatel napojených na veřejnou technickou infrastrukturu</status>
+                    <status>J.105 - Podíl zemědělské půdy z celkové výměry územního celku</status>
+                    <status>J.106 - Podíl druhů pozemků z celkové výměry zemědělské půdy</status>
+                    <status>J.107 - Podíl tříd ochrany zemědělské půdy z celkové výměry územního celku</status>
+                    <status>J.108 - Podíl jednotlivých druhů pozemků z celkové výměry územního celku</status>
+                    <status>J.109 - Hranice přírodních lesních oblastí</status>
+                    <status>J.110 - Hranice bioregionů a biochor</status>
+                    <status>J.111 - Hranice klimatických regionů</status>
+                    <status>J.112 - Regionalizace území podle míry ohrožení suchem</status>
+                    <status>J.113 - Další dostupné informace o území</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+
+    <!--GEMET klíčové slovo-->
+    <XmlDataProvider x:Key="ThemeGEMET" XPath="/"
+          IsAsynchronous= "False"
+          IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Projekce geografická/Geographical projection</status>
+                    <status>Budovy/Buildings</status>
+                    <status>Bezpečnost/Safety</status>
+                    <status>Demografie/Demography</status>
+                    <status>Infrastruktura dopravní/Traffic infrastructure</status>
+                    <status>Ekonomie/Economics</status>
+                    <status>Geologie/Geology</status>
+                    <status>Hluk/Noise</status>
+                    <status>Ochrana prostředí životního/Environmental conservation</status>
+                    <status>Odpady/Waste</status>
+                    <status>Znečištění prostředí životního/Environmental pollution</status>
+                    <status>Zařízení kulturní/Cultural facility</status>
+                    <status>Pedosféra/Pedosphere</status>
+                    <status>Infrastruktura/Infrastructure</status>
+                    <status>Urbanismus/Urban planning</status>
+                    <status>Správa/Administration</status>
+                    <status>Hydrosféra/Hydrosphere</status>
+                    <status>Zemědělství/Agriculture</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!--IPR klíčové slovo-->
+    <XmlDataProvider x:Key="IPRkeyword" XPath="/"
+          IsAsynchronous= "False"
+          IsInitialLoadEnabled= "True">
+        <x:XData>
+            <ANY xmlns="">
+                <statuscodes>
+                    <status>Archivní mapy/Archival maps</status>
+                    <status>Budovy/Buildings</status>
+                    <status>Civilní ochrana a bezpečnost/Civil protection and security</status>
+                    <status>Demografie/Demography</status>
+                    <status>Doprava/Transportation</status>
+                    <status>Ekonomie/Economics</status>
+                    <status>Geologie/Geology</status>
+                    <status>Hluk/Noise</status>
+                    <status>Lesy/Woods</status>
+                    <status>Mapové podklady/Basemaps</status>
+                    <status>Odpady/Waste</status>
+                    <status>Ochrana přírody/Nature conservation</status>
+                    <status>Ortofotomapa/Ortophoto maps</status>
+                    <status>Ovzduší/Air</status>
+                    <status>Památky/Monuments</status>
+                    <status>Půda/Soil</status>
+                    <status>Technická infrastruktura/Infrastructure</status>
+                    <status>Urbanismus/Urban planning</status>
+                    <status>Správa/Administration</status>
+                    <status>Územní identifikace/Territorial identification</status>
+                    <status>Voda/Water</status>
+                    <status>Zemědělství/Agriculture</status>
+                </statuscodes>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!-- Doplňkové klíčové slovo IPR -->
+    <XmlDataProvider x:Key="XmlRecord_OtherIPRKeywordDesc" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+        <x:XData>
+            <ANY xmlns="">
+                <OtherIPRKeywordInfo editorExpand="True">
+                    <OtherIPRKeywordDescription/>
+                </OtherIPRKeywordInfo>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!-- datastore -->
+    <XmlDataProvider x:Key="XmlRecord_DatastoreDesc" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+        <x:XData>
+            <ANY xmlns="">
+                <DatastoreInfo editorExpand="True">
+                    <DatastoreDescription/>
+                </DatastoreInfo>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!-- OpendataCategory -->
+    <XmlDataProvider x:Key="XmlRecord_OpendataCategory" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+        <x:XData>
+            <ANY xmlns="">
+                <OpendataCategoryInfo editorExpand="True">
+                    <OpendataCategoryDescription/>
+                </OpendataCategoryInfo>
+            </ANY>
+        </x:XData>
+    </XmlDataProvider>
+    <!--*******************************************************************************-->
+        
+
+    <XmlDataProvider x:Key="XmlRecord_OtherKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <otherKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_ThemeKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <themeKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_PlaceKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <placeKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_TempKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <tempKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_DisKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <discKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_StratKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <stratKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_SearchKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <searchKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_ProductKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <productKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_SubTopicKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <subTopicCatKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <e:Codelists x:Key="IMS_ContentType" CodelistName="IMS_ContentType"/>
+
+    <!-- validation issues  -->
+    <v:MetadataIssueInfo x:Key="topics" Message="{x:Static r:Issues.topics_REQ}" />
+    <v:MetadataIssueInfo x:Key="themeKeywords" Name="themeKeywords" Message="{x:Static r:Issues.themeKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="placeKeywords" Name="placeKeywords" Message="{x:Static r:Issues.placeKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="temporalKeywords" Name="temporalKeywords" Message="{x:Static r:Issues.temporalKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="disciplineKeywords" Name="disciplineKeywords" Message="{x:Static r:Issues.disciplineKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="stratumKeywords" Name="stratumKeywords" Message="{x:Static r:Issues.stratumKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="otherKeywords" Name="otherKeywords" Message="{x:Static r:Issues.otherKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="productKeywords" Name="productKeywords" Message="{x:Static r:Issues.productKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="InspireThemeKeywords_REQ" Message="{x:Static r:Issues.InspireThemeKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="InspireGemetDate_REQ" Message="{x:Static r:Issues.InspireGemetDate_REQ}" />
+    <v:MetadataIssueInfo x:Key="InspireGemetLinkage_REQ" Message="{x:Static r:Issues.InspireGemetLinkage_REQ}" />
+
+    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
+    <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
+    <v:MetadataIssueInfo x:Key="tagTopicKeyword" Message="{x:Static r:Issues.tagTopicKeyword_REQ}" />
+    <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
+
+    <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="addressType" Message="{x:Static r:Issues.addressType_REQ}" />
+    <v:MetadataIssueInfo x:Key="adminArea" Message="{x:Static r:Issues.adminArea_REQ}" />
+    <v:MetadataIssueInfo x:Key="adminArea_FGDC" Name="adminArea_FGDC" Message="{x:Static r:Issues.adminArea_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="city" Message="{x:Static r:Issues.city_REQ}" />
+    <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
+
+    <!-- id and citation -->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
+    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+
+  </UserControl.Resources>
+
+  <Grid Style="{DynamicResource EditorFrontPageStyle}">
+    <StackPanel>
+      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <!-- page title -->
+              <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_KEYWORDS}"/>
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <StackPanel>
+                  <!-- topics -->
+                  <Label Style="{DynamicResource EditorVLabelNoIdentStyle}" 
+                      ToolTip="{x:Static r:Definitions.MD_DataIdentification_topicCategory}"
+                      v:Nav.AnchorName="topics,tpCatBag"
+                      Content="{x:Static r:Resources.LBL_DESC_TOPICS}" />
+                  <StackPanel Orientation="Horizontal">
+                    <StackPanel Style="{DynamicResource EditorCheckboxPanel}">
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_001}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_001/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_002}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_002/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_003}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_003/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_004}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_004/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_005}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_005/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_006}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_006/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_007}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_007/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_008}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_008/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_009}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_009/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_010}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_010/@value}" v:Nav.Check="True"/>
+                    </StackPanel>
+                    <StackPanel Style="{DynamicResource EditorCheckboxPanel}">
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_011}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_011/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_012}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_012/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_013}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_013/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_014}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_014/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_015}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_015/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_016}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_016/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_017}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_017/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_018}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_018/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_019}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_019/@value}" v:Nav.Check="True"/>
+                    </StackPanel>
+                  </StackPanel>
+
+                </StackPanel>
+              </Border>
+
+              <!-- content type -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <DockPanel LastChildFill="True">
+                  <Label DockPanel.Dock="Left" Style="{DynamicResource EditorHLabelNoIdentStyle}" 
+                      Content="{x:Static r:Resources.LBL_IMS_CONTENT_TYPE}"/>
+                   <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" DockPanel.Dock="Right"
+                      tu:MetadataStyle.OnlyProfiles="FGDC"
+                      ToolTip="{x:Static r:Definitions.ESRI_exportContentTypeToFGDC}"
+                      Content="{x:Static r:Resources.LBL_IMS_CONTENT_TYPE_EXPORT}" 
+                      IsChecked="{Binding XPath=/metadata/Esri/DataProperties/itemProps/imsContentType/@export}"
+                      AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ExportAsResourceDescription}"/>
+                   <ComboBox DockPanel.Dock="Right" Loaded="PostProcessComboBoxValues" 
+                      p:EditorPage.SourceXPath="/metadata/Esri/DataProperties/itemProps/imsContentType" 
+                      Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
+                      ToolTip="{x:Static r:Definitions.ESRI_geoportalContentType}"
+                      ItemsSource="{Binding Source={StaticResource IMS_ContentType}, Path=List}"
+                      DisplayMemberPath="."
+                      SelectedValuePath="@value"
+                      AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ContentType}">
+                    <ComboBox.SelectedValue>
+                      <e:MetadataElementSync XPath="/metadata/Esri/DataProperties/itemProps/imsContentType"/>
+                    </ComboBox.SelectedValue>
+                  </ComboBox>
+                </DockPanel>
+              </Border>
+
+              <!--**************************************************************************************************************************************************-->
+              <!-- Theme INSPIRE -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+                          HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+                          Style="{DynamicResource EditorHLabelNoIdentStyle}"
+                          Content="{x:Static r:Resources.THEME_INSPIRE}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+                          SelectionChanged="ComboBoxSyncSelectionChanged" 
+                          Style="{DynamicResource EditorHComboBoxStyle}" 
+                          IsEditable="False" 
+                          ItemsSource="{Binding Source={StaticResource ThemeINSPIRE}, XPath=//status}" 
+                          DisplayMemberPath="." 
+                          SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="INSPIREstatus" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- Theme IPR -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+                          HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+                          Style="{DynamicResource EditorHLabelNoIdentStyle}"
+                          Content="{x:Static r:Resources.THEME_IPR}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+                          SelectionChanged="ComboBoxSyncSelectionChanged" 
+                          Style="{DynamicResource EditorHComboBoxStyle}" 
+                          IsEditable="False" 
+                          ItemsSource="{Binding Source={StaticResource ThemeIPR}, XPath=//status}" 
+                          DisplayMemberPath="." 
+                          SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="IPRstatus" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- Theme UAP 2024 -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+  HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+  Style="{DynamicResource EditorHLabelNoIdentStyle}"
+  Content="{x:Static r:Resources.THEME_UAP_2024}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+  SelectionChanged="ComboBoxSyncSelectionChanged" 
+  Style="{DynamicResource EditorHComboBoxStyle}" 
+  IsEditable="False" 
+  ItemsSource="{Binding Source={StaticResource ThemeUAP2024}, XPath=//status}" 
+  DisplayMemberPath="." 
+  SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="UAPstatus2024" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- Theme UAP 2020 -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+                          HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+                          Style="{DynamicResource EditorHLabelNoIdentStyle}"
+                          Content="{x:Static r:Resources.THEME_UAP_2020}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+                          SelectionChanged="ComboBoxSyncSelectionChanged" 
+                          Style="{DynamicResource EditorHComboBoxStyle}" 
+                          IsEditable="False" 
+                          ItemsSource="{Binding Source={StaticResource ThemeUAP}, XPath=//status}" 
+                          DisplayMemberPath="." 
+                          SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="UAPstatus" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- IPR Keyword -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+                          HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+                          Style="{DynamicResource EditorHLabelNoIdentStyle}"
+                          Content="{x:Static r:Resources.IPR_KEYWORD}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+                          SelectionChanged="ComboBoxSyncSelectionChanged" 
+                          Style="{DynamicResource EditorHComboBoxStyle}" 
+                          IsEditable="False" 
+                          ItemsSource="{Binding Source={StaticResource IPRkeyword}, XPath=//status}" 
+                          DisplayMemberPath="." 
+                          SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="IPRkeywordstatus" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- Other IPR keyword -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=OtherIPRKeywordInfo[OtherIPRKeywordDescription]}">
+                          <ListBox.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                  <StackPanel/>
+                              </ItemsPanelTemplate>
+                          </ListBox.ItemsPanel>
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <Expander Style="{DynamicResource EditorExpander2Style}"
+  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ThemeKeywordGroup}">
+                                      <Expander.Header>
+                                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+  RelativeSource={RelativeSource FindAncestor,
+  AncestorType={x:Type ContentPresenter}},
+  Mode=OneWayToSource}" LastChildFill="True">
+                                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+  Name="TopicsAndKeywordsPage_ThemeKeywordDelete">
+                                                  <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                              </Button>
+                                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.OTHER_IPR_KEYWORD}"/>
+                                          </DockPanel>
+                                      </Expander.Header>
+                                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=OtherIPRKeywordDescription}">
+                                          <ListBox.ItemTemplate>
+                                              <DataTemplate>
+                                                  <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                                                      <tp:Custom_OtherIPRKeyword/>
+                                                  </StackPanel>
+                                              </DataTemplate>
+                                          </ListBox.ItemTemplate>
+                                      </ListBox>
+                                  </Expander>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+
+                      <Button Tag="OtherIPRKeywordDesc" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+  Name="ResourceOtherIPRKeyword_OtherIPRKeywordAdd">
+                          <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                              <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                              <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.OTHER_IPR_KEYWORD}"/>
+                          </StackPanel>
+                      </Button>
+                  </StackPanel>
+              </Border>
+
+              <!--*******************************************************************************************************************************************-->
+
+                            <!-- theme keys -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=themeKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}"
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ThemeKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_ThemeKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_THEMEKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_theme}" />
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD theme keywords -->  <!-- ## Ask Martin if he need the automation ID for AddButton; if so add to other keyword types. Where to look for button for Adding Thesaurus Citation? -->
+                  <Button Tag="ThemeKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_ThemeKeywordAdd">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_THEME}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!--******************************************************************************************************************************************-->
+              <!-- Theme GEMET -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/custom/TopicStatus}">
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <StackPanel>
+                                      <DockPanel LastChildFill="True"
+                          HorizontalAlignment="Stretch">
+                                          <Label DockPanel.Dock="Left"
+                          Style="{DynamicResource EditorHLabelNoIdentStyle}"
+                          Content="{x:Static r:Resources.THEME_GEMET}"/>
+
+                                          <ComboBox Loaded="PostProcessComboBoxValues" 
+                          SelectionChanged="ComboBoxSyncSelectionChanged" 
+                          Style="{DynamicResource EditorHComboBoxStyle}" 
+                          IsEditable="False" 
+                          ItemsSource="{Binding Source={StaticResource ThemeGEMET}, XPath=//status}" 
+                          DisplayMemberPath="." 
+                          SelectedValuePath=".">
+
+                                              <ComboBox.SelectedValue>
+                                                  <Binding XPath="GEMETstatus" Mode="TwoWay"/>
+                                              </ComboBox.SelectedValue>
+                                          </ComboBox>
+                                      </DockPanel>
+                                  </StackPanel>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+                  </StackPanel>
+              </Border>
+
+              <!-- datastore -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=DatastoreInfo[DatastoreDescription]}">
+                          <ListBox.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                  <StackPanel/>
+                              </ItemsPanelTemplate>
+                          </ListBox.ItemsPanel>
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <Expander Style="{DynamicResource EditorExpander2Style}"
+  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ThemeKeywordGroup}">
+                                      <Expander.Header>
+                                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+  RelativeSource={RelativeSource FindAncestor,
+  AncestorType={x:Type ContentPresenter}},
+  Mode=OneWayToSource}" LastChildFill="True">
+                                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+  Name="TopicsAndKeywordsPage_ThemeKeywordDelete">
+                                                  <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                              </Button>
+                                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.DATA_STORE}"/>
+                                          </DockPanel>
+                                      </Expander.Header>
+                                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=DatastoreDescription}">
+                                          <ListBox.ItemTemplate>
+                                              <DataTemplate>
+                                                  <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                                                      <tp:Custom_Datastore/>
+                                                  </StackPanel>
+                                              </DataTemplate>
+                                          </ListBox.ItemTemplate>
+                                      </ListBox>
+                                  </Expander>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+
+                      <Button Tag="DatastoreDesc" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+  Name="ResourceDatastore_DatastoreAdd">
+                          <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                              <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                              <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.DATA_STORE}"/>
+                          </StackPanel>
+                      </Button>
+                  </StackPanel>
+              </Border>
+
+
+              <!-- OpendataCategory -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                  <StackPanel>
+                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=OpendataCategoryInfo[OpendataCategoryDescription]}">
+                          <ListBox.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                  <StackPanel/>
+                              </ItemsPanelTemplate>
+                          </ListBox.ItemsPanel>
+                          <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                  <Expander Style="{DynamicResource EditorExpander2Style}"
+  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ThemeKeywordGroup}">
+                                      <Expander.Header>
+                                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+  RelativeSource={RelativeSource FindAncestor,
+  AncestorType={x:Type ContentPresenter}},
+  Mode=OneWayToSource}" LastChildFill="True">
+                                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+  Name="TopicsAndKeywordsPage_ThemeKeywordDelete">
+                                                  <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                              </Button>
+                                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.OPENDATA_CATEGORY}"/>
+                                          </DockPanel>
+                                      </Expander.Header>
+                                      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=OpendataCategoryDescription}">
+                                          <ListBox.ItemTemplate>
+                                              <DataTemplate>
+                                                  <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                                                      <tp:Custom_OpendataCategory/>
+                                                  </StackPanel>
+                                              </DataTemplate>
+                                          </ListBox.ItemTemplate>
+                                      </ListBox>
+                                  </Expander>
+                              </DataTemplate>
+                          </ListBox.ItemTemplate>
+                      </ListBox>
+
+                      <Button Tag="OpendataCategory" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+  Name="ResourceOpendataCategory_OpendataCategoryAdd">
+                          <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                              <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                              <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.OPENDATA_CATEGORY}"/>
+                          </StackPanel>
+                      </Button>
+                  </StackPanel>
+              </Border>
+              <!--**************************************************************************************************************************************************-->
+
+                            <!-- place keywords -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=placeKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_PlaceKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_PlaceKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_PLACEKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_place}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD place keywords -->
+                  <Button Tag="PlaceKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_PlaceKeywordAdd">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_PLACE}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- temporal keywords -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=tempKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_TemporalKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_TemporalKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_TEMPKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_temporal}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD temporal keywords -->
+                  <Button Tag="TempKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_TemporalKeywordAdd">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_TEMP}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- discipline keywords -->
+              <Border Style="{DynamicResource EditorBorder2Style}" tu:MetadataStyle.OnlyProfiles="ISO19139,NAP,INSPIRE,ISO19115_3">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=discKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_DisciplineKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_DisciplineKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_DISKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_discipline}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD discipline keywords -->
+                  <Button Tag="DisKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_DiscilineKeywordAdd">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_DIS}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- stratum keywords -->
+              <Border Style="{DynamicResource EditorBorder2Style}">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=stratKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_StratumKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_StratumKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_STRATKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_stratum}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD statum keywords -->
+                      <Button Tag="StratKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                              Name="TopicsAndKeywordsPage_StratumKeywordAdd">
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_STRAT}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- other keywords -->
+              <Border Style="{DynamicResource EditorBorder2Style}" tu:MetadataStyle.OnlyProfiles="ISO19139,NAP,INSPIRE,ISO19115_3">
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=otherKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_OtherKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_OtherKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_OTHERKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_other}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD other keywords -->
+                  <Button Tag="OtherKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_OtherKeywordAdd">
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_OTHER}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- product keys -->
+              <Border Style="{DynamicResource EditorBorder2Style}" tu:MetadataStyle.OnlyProfiles="NAP,ISO19115_3" >
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=productKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_ProductKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_ProductKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_PRODUCTKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_NAP_product}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD product keywords -->
+                  <Button Tag="ProductKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_ProductKeywordAdd">
+                      <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_PRODUCT}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+
+              <!-- sub topic keys -->
+              <Border Style="{DynamicResource EditorBorder2Style}" tu:MetadataStyle.OnlyProfiles="NAP,ISO19115_3" >
+                <StackPanel>
+                  <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=subTopicCatKeys}">
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <Expander Style="{DynamicResource EditorExpander2Style}" 
+                                  AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=TopicsAndKeywordsPage_SubTopicKeywordGroup}">
+                          <Expander.Header>
+                            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                              RelativeSource={RelativeSource FindAncestor,
+                              AncestorType={x:Type ContentPresenter}},
+                              Mode=OneWayToSource}" LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
+                                      Name="TopicsAndKeywordsPage_SubTopicKeywordDelete">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
+                              </Button>
+                              <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_SUBTOPICKEY}"/>
+                            </DockPanel>
+                          </Expander.Header>
+                          <StackPanel>
+                            <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_NAP_subtopic}"/>
+                            <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                            </Border>
+                          </StackPanel>
+                        </Expander>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                  <!-- ADD product keywords -->
+                  <Button Tag="SubTopicKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
+                          Name="TopicsAndKeywordsPage_SubTopicKeywordAdd">
+                      <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
+                      <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_SUBTOPIC}"/>
+                    </StackPanel>
+                  </Button>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <!-- validate after all anchors are loaded -->
+      <v:PageValidateControl/>
+
+    </StackPanel>
+  </Grid>
+</p:EditorPage>

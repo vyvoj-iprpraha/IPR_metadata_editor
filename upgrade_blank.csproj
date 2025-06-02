@@ -1,0 +1,733 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <NoWarn>CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Config.daml" />
+  </ItemGroup>
+  <!--References-->
+	<ItemGroup>
+    <Reference Include="ArcGIS.Desktop.Framework">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Core">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Core.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Core">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Mapping">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Mapping\ArcGIS.Desktop.Mapping.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Catalog">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Catalog\ArcGIS.Desktop.Catalog.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Editing">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Editing\ArcGIS.Desktop.Editing.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Extensions">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.GeoProcessing">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\GeoProcessing\ArcGIS.Desktop.GeoProcessing.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Layouts">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Layout\ArcGIS.Desktop.Layouts.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Shared.Wpf">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Desktop.Shared.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Ribbon.Wpf">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Desktop.Ribbon.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.DataGrid.Contrib.Wpf">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Desktop.DataGrid.Contrib.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Resources">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ItemIndex">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\ESRI.ArcGIS.ItemIndex.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Metadata">
+      <HintPath>C:\Esri\ArcGIS\Pro\bin\Extensions\Metadata\ArcGIS.Desktop.Metadata.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+	</ItemGroup>
+  <!--XAML Pages-->
+  <!--XAML Code behind-->
+  <ItemGroup>
+    <None Include="Pages\BooleanValueSync.xaml.cs" />
+    <None Include="Pages\CharacterString.xaml.cs" />
+    <None Include="Pages\CI_Citation.xaml.cs" />
+    <None Include="Pages\CI_Contact.xaml.cs" />
+    <None Include="Pages\CI_OnlineResource.xaml.cs" />
+    <None Include="Pages\CI_PresentationForm.xaml.cs" />
+    <None Include="Pages\CI_PresentationFormCode.xaml.cs" />
+    <None Include="Pages\CI_ResponsibleParty.xaml.cs" />
+    <None Include="Pages\CI_ResponsiblePartyReadOnly.xaml.cs" />
+    <None Include="Pages\ConstraintTypes.xaml.cs" />
+    <None Include="Pages\ContactManager.xaml.cs" />
+    <None Include="Pages\ContentInformation.xaml.cs" />
+    <None Include="Pages\CountryCode.xaml.cs" />
+    <None Include="Pages\CustomPage.xaml.cs" />
+    <None Include="Pages\DataQuality.xaml.cs" />
+    <None Include="Pages\DatasetCitation.xaml.cs" />
+    <None Include="Pages\DistributionInfo.xaml.cs" />
+    <None Include="Pages\DQ_ConformanceResult.xaml.cs" />
+    <None Include="Pages\DQ_DataQuality.xaml.cs" />
+    <None Include="Pages\DQ_Element.xaml.cs" />
+    <None Include="Pages\DQ_QuantitativeResult.xaml.cs" />
+    <None Include="Pages\DS_AssociationTypeCode.xaml.cs" />
+    <None Include="Pages\DS_InitiativeTypeCode.xaml.cs" />
+    <None Include="Pages\EditorRichTextBox.xaml.cs" />
+    <None Include="Pages\EntityAttribute.xaml.cs" />
+    <None Include="Pages\EntityAttributeCodesetDomain.xaml.cs" />
+    <None Include="Pages\EntityAttributeDetails.xaml.cs" />
+    <None Include="Pages\EntityAttributeEnumDomValues.xaml.cs" />
+    <None Include="Pages\EntityAttributeInfo.xaml.cs" />
+    <None Include="Pages\EntityAttributeOverview.xaml.cs" />
+    <None Include="Pages\EntityAttributeRangeDomain.xaml.cs" />
+    <None Include="Pages\EX_Extent.xaml.cs" />
+    <None Include="Pages\EX_GeographicBoundingBox.xaml.cs" />
+    <None Include="Pages\EX_GeographicDescription.xaml.cs" />
+    <None Include="Pages\EX_VerticalExtent.xaml.cs" />
+    <None Include="Pages\GenericName.xaml.cs" />
+    <None Include="Pages\GeoprocessingHistory.xaml.cs" />
+    <None Include="Pages\GML_Point.xaml.cs" />
+    <None Include="Pages\GPCustomTool.xaml.cs" />
+    <None Include="Pages\ImageAttachement.xaml.cs" />
+    <None Include="Pages\INSPIRE_AccessConstraint.xaml.cs" />
+    <None Include="Pages\INSPIRE_LegalConstraints.xaml.cs" />
+    <None Include="Pages\INSPIRE_UseLimitation.xaml.cs" />
+    <None Include="Pages\ItemInfo.xaml.cs" />
+    <None Include="Pages\Keywords.xaml.cs" />
+    <None Include="Pages\LanguageCode.xaml.cs" />
+    <None Include="Pages\LI_Lineage.xaml.cs" />
+    <None Include="Pages\LI_ProcessStep.xaml.cs" />
+    <None Include="Pages\LI_Source.xaml.cs" />
+    <None Include="Pages\Locale.xaml.cs" />
+    <None Include="Pages\Locales.xaml.cs" />
+    <None Include="Pages\MD_AggregateInformation.xaml.cs" />
+    <None Include="Pages\MD_ApplicationSchemaInformation.xaml.cs" />
+    <None Include="Pages\MD_Band.xaml.cs" />
+    <None Include="Pages\MD_BrowseGraphic.xaml.cs" />
+    <None Include="Pages\MD_CharacterSetCode.xaml.cs" />
+    <None Include="Pages\MD_ClassificationCode.xaml.cs" />
+    <None Include="Pages\MD_Constraints.xaml.cs" />
+    <None Include="Pages\MD_CoverageDescriptionBase.xaml.cs" />
+    <None Include="Pages\MD_CoverageDescription.xaml.cs" />
+    <None Include="Pages\MD_DigitalTransferOptions.xaml.cs" />
+    <None Include="Pages\MD_Dimension.xaml.cs" />
+    <None Include="Pages\MD_Distribution.xaml.cs" />
+    <None Include="Pages\MD_Distributor.xaml.cs" />
+    <None Include="Pages\MD_FeatureCatalogueDescription.xaml.cs" />
+    <None Include="Pages\MD_FileIdentifier.xaml.cs" />
+    <None Include="Pages\MD_Format.xaml.cs" />
+    <None Include="Pages\MD_Georectified.xaml.cs" />
+    <None Include="Pages\MD_Georeferenceable.xaml.cs" />
+    <None Include="Pages\MD_GridSpatialRepresentation.xaml.cs" />
+    <None Include="Pages\MD_GridSpatialRepresentationBase.xaml.cs" />
+    <None Include="Pages\MD_Identifier.xaml.cs" />
+    <None Include="Pages\MD_ImageDescription.xaml.cs" />
+    <None Include="Pages\MD_Keywords.xaml.cs" />
+    <None Include="Pages\MD_LegalConstraints.xaml.cs" />
+    <None Include="Pages\MD_MaintenanceInformation.xaml.cs" />
+    <None Include="Pages\MD_Medium.xaml.cs" />
+    <None Include="Pages\MD_MediumFormatCode.xaml.cs" />
+    <None Include="Pages\MD_ProgressCode.xaml.cs" />
+    <None Include="Pages\MD_RangeDimension.xaml.cs" />
+    <None Include="Pages\MD_ReferenceSystem.xaml.cs" />
+    <None Include="Pages\MD_Resolution.xaml.cs" />
+    <None Include="Pages\MD_RestrictionCode.xaml.cs" />
+    <None Include="Pages\MD_ScopeCode.xaml.cs" />
+    <None Include="Pages\MD_ScopeCode_MD_Metadata.xaml.cs" />
+    <None Include="Pages\MD_ScopeDescription.xaml.cs" />
+    <None Include="Pages\MD_SecurityConstraints.xaml.cs" />
+    <None Include="Pages\MD_StandardOrderProcess.xaml.cs" />
+    <None Include="Pages\MD_ThemeKeywords.xaml.cs" />
+    <None Include="Pages\MD_Usage.xaml.cs" />
+    <None Include="Pages\MD_VectorSpatialRepresentation.xaml.cs" />
+    <None Include="Pages\MetadataConstraints.xaml.cs" />
+    <None Include="Pages\MetadataContacts.xaml.cs" />
+    <None Include="Pages\MetadataDetails.xaml.cs" />
+    <None Include="Pages\MetadataMaintenance.xaml.cs" />
+    <None Include="Pages\PartyPickerControl.xaml.cs" />
+    <None Include="Pages\References.xaml.cs" />
+    <None Include="Pages\ReferenceSystem.xaml.cs" />
+    <None Include="Pages\ResourceCitationContacts.xaml.cs" />
+    <None Include="Pages\ResourceConstraints.xaml.cs" />
+    <None Include="Pages\ResourceDetails.xaml.cs" />
+    <None Include="Pages\ResourceExtent.xaml.cs" />
+    <None Include="Pages\ResourceMaintenance.xaml.cs" />
+    <None Include="Pages\ResourcePoc.xaml.cs" />
+    <None Include="Pages\RS_Identifier.xaml.cs" />
+    <None Include="Pages\Services.xaml.cs" />
+    <None Include="Pages\SpatialRepresentation.xaml.cs" />
+    <None Include="Pages\SV_CoupledResource.xaml.cs" />
+    <None Include="Pages\TM_Period.xaml.cs" />
+    <None Include="Pages\UCUM.xaml.cs" />
+    <None Include="Pages\UCUM_Length.xaml.cs" />
+    <None Include="Pages\ValueUoM.xaml.cs" />
+  </ItemGroup>
+  <!--Resource Files-->
+  <ItemGroup>
+    <None Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+    <None Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>upgrade_blank.Properties</CustomToolNamespace>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Issues.Designer.cs">
+      <DependentUpon>Issues.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+      <None Include="Properties\Issues.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>upgrade_blank.Properties</CustomToolNamespace>
+      <LastGenOutput>Issues.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Definitions.Designer.cs">
+      <DependentUpon>Definitions.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+        <None Include="Properties\Definitions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>upgrade_blank.Properties</CustomToolNamespace>
+      <LastGenOutput>Definitions.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <!--Add-In content-->
+  <ItemGroup>
+    <Content Include="Config.daml" />
+    <Content Include="Images\AddInDesktop16.png" />
+    <Content Include="Images\AddInDesktop32.png" />
+    <Content Include="DarkImages\AddInDesktop16.png" />
+    <Content Include="DarkImages\AddInDesktop32.png" />
+  </ItemGroup>
+  <!--Add-In class files-->
+  <ItemGroup>
+    <None Include="Properties\launchSettings.json" />
+    <None Include="Icons\RichTextEditor\indentless.png" />
+    <None Include="Icons\RichTextEditor\indentmore.png" />
+    <None Include="Icons\RichTextEditor\link.png" />
+    <None Include="Icons\RichTextEditor\listbullets.png" />
+    <None Include="Icons\RichTextEditor\numberbullets.png" />
+    <None Include="Icons\RichTextEditor\pcenter.png" />
+    <None Include="Icons\RichTextEditor\pjustify.png" />
+    <None Include="Icons\RichTextEditor\pleft.png" />
+    <None Include="Icons\RichTextEditor\pright.png" />
+  </ItemGroup>
+  <!--NuGet-->
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Definitions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Definitions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Issues.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Issues.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\BooleanValueSync.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CharacterString.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_Citation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_Contact.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_OnlineResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_PresentationForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_PresentationFormCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_ResponsibleParty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CI_ResponsiblePartyReadOnly.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ConstraintTypes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ContactManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ContentInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CountryCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CustomPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DataQuality.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DatasetCitation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DistributionInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DQ_ConformanceResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DQ_DataQuality.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DQ_Element.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DQ_QuantitativeResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DS_AssociationTypeCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DS_InitiativeTypeCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EditorRichTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttribute.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeCodesetDomain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeEnumDomValues.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EntityAttributeRangeDomain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EX_Extent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EX_GeographicBoundingBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EX_GeographicDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EX_VerticalExtent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\GenericName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\GeoprocessingHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\GML_Point.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\GPCustomTool.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ImageAttachement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\INSPIRE_AccessConstraint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\INSPIRE_LegalConstraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\INSPIRE_UseLimitation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ItemInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Keywords.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\LanguageCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\LI_Lineage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\LI_ProcessStep.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\LI_Source.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Locale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Locales.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_AggregateInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ApplicationSchemaInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Band.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_BrowseGraphic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_CharacterSetCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ClassificationCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Constraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_CoverageDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_CoverageDescriptionBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_DigitalTransferOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Dimension.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Distribution.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Distributor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_FeatureCatalogueDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_FileIdentifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Format.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Georectified.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Georeferenceable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_GridSpatialRepresentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_GridSpatialRepresentationBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Identifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ImageDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Keywords.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_LegalConstraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_MaintenanceInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Medium.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_MediumFormatCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ProgressCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_RangeDimension.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ReferenceSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Resolution.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_RestrictionCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ScopeCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ScopeCode_MD_Metadata.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ScopeDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_SecurityConstraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_StandardOrderProcess.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_ThemeKeywords.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_Usage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MD_VectorSpatialRepresentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MetadataConstraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MetadataContacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MetadataDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MetadataMaintenance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\PartyPickerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\References.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ReferenceSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourceCitationContacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourceConstraints.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourceDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourceExtent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourceMaintenance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResourcePoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\RS_Identifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Services.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SpatialRepresentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SV_CoupledResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\TM_Period.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UCUM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UCUM_Length.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ValueUoM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="C:\Esri\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets" Condition="Exists('C:\Esri\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets') AND !Exists('Esri.ArcGISPro.Extensions.targets')" />
+</Project>
